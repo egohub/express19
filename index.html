@@ -1,44 +1,57 @@
 <html>
-<head>
-	<title>VuePress API Feed Reader</title>
-  <!-- Google fonts -->
-<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700,900" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-<!-- Ioincons -->
-<link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
-<!-- animate.css -->
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">  
-<!-- Import axios.js for mange http request in order to get remote API content -->
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-</head>
-<!-- Vue starts here -->
-    <div id="app">
-      <div class="container" v-bind:class="hiContrast.class">
-        <div class="wrap">
-         <transition enter-active-class="animated pulse" leave-active-class="animated fadeOutUp"> 
-         <header v-if="posts">
-           <h1><i class="ion-ios-paper-outline"></i><span v-html="siteName"></span></h1>
-          <button class="bttn" v-on:click="toggleHiContrast()"><i class="ion-contrast"></i> {{ hiContrast.label }}</button>
-           <button v-if="posts" class="bttn" v-on:click="clearFeed()"><i class="ion-social-rss-outline"></i> Switch Feed</button>
-        </header>
+  <head>
+    <title>VuePress API Feed Reader</title>
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700,900" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <!-- Ioincons -->
+    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+    <!-- animate.css -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">
+    <!-- Import axios.js for mange http request in order to get remote API content -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <!-- Vue starts here -->
+  <div id="app">
+    <div class="container" v-bind:class="hiContrast.class">
+      <div class="wrap">
+        <transition enter-active-class="animated pulse" leave-active-class="animated fadeOutUp">
+          <header v-if="posts">
+            <h1>
+              <i class="ion-ios-paper-outline"></i>
+              <span v-html="siteName"></span></h1>
+            <button class="bttn" v-on:click="toggleHiContrast()">
+              <i class="ion-contrast"></i>
+              {{ hiContrast.label }}</button>
+            <button v-if="posts" class="bttn" v-on:click="clearFeed()">
+              <i class="ion-social-rss-outline"></i>
+              Switch Feed</button>
+          </header>
         </transition>
         <transition enter-active-class="animated fadeInLeft" leave-active-class="animated fadeOutLeft">
-        <aside v-show="posts">
-          <h2>Latest <input v-model="query.perPage" type="number" min="1" max="20"> News</h2>
-          <ul class="article-list">
-            <li v-for="post in posts" v-bind:class="{active: post.id == activePost.id}">
-              <i class="ion-ios-arrow-right" v-if="post.id == activePost.id"></i>
-              <a v-on:click="readPost(post)">
-                <h6 v-html="post.title.rendered"></h6>
-              </a>
-            </li>
-          </ul>
-          <nav class="pagination">
-            <button type="button" v-if='query.page > 1' v-on:click="wpQuery(query.page -= 1)" class="bttn nav-prev"><i class="ion-ios-arrow-left"></i>Newer</button>
-            <div class="page-count">{{ query.page }} / {{ pageNumber }}</div>
-            <button type="button" v-if='query.page != pageNumber' v-on:click="wpQuery(query.page += 1)" class="bttn nav-next">Older<i class="ion-ios-arrow-right"></i></button>
-        </nav>
-        </aside>
+          <aside v-show="posts">
+            <h2>Latest
+              <input v-model="query.perPage" type="number" min="1" max="20">
+              News</h2>
+            <ul class="article-list">
+              <li v-for="post in posts" v-bind:class="{active: post.id == activePost.id}">
+                <i class="ion-ios-arrow-right" v-if="post.id == activePost.id"></i>
+                <a v-on:click="readPost(post)">
+                  <h6 v-html="post.title.rendered"></h6>
+                </a>
+              </li>
+            </ul>
+            <nav class="pagination">
+              <button type="button" v-if='query.page > 1' v-on:click="wpQuery(query.page -= 1)" class="bttn nav-prev">
+                <i class="ion-ios-arrow-left"></i>Newer</button>
+              <div class="page-count">{{ query.page }}
+                /
+                {{ pageNumber }}</div>
+              <button type="button" v-if='query.page != pageNumber' v-on:click="wpQuery(query.page += 1)" class="bttn nav-next">Older<i class="ion-ios-arrow-right"></i>
+              </button>
+            </nav>
+          </aside>
         </transition>
         <transition enter-active-class="animated fadeInRight" leave-active-class="animated fadeOut">
           <section v-if="activePost">
@@ -49,7 +62,9 @@
       </div>
       <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
         <div class="site-url" v-show="!posts">
-          <button v-on:click="closeModal()"><i class="ion-close"></i></button>
+          <button v-on:click="closeModal()">
+            <i class="ion-close"></i>
+          </button>
           <h2>WordPress Website's URL</h2>
           <input type="text" v-model="query.url" v-on:keyup.enter="searchFeed()">
           <h6>{{ queryError }}</h6>
@@ -57,4 +72,6 @@
       </transition>
     </div>
   </div>
+  <<script src="app.js"></script>>
+
 </html>
