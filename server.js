@@ -1,7 +1,7 @@
 var express = require('express'),
     bodyParser      = require('body-parser'),
     methodOverride  = require('method-override'),
-    // sessions        = require('./routes/sessions'),
+    parse = require('./routes/xParse'),
     api        = require('./routes'),
     app = express();
     var request = require('request');
@@ -25,7 +25,7 @@ app.all('*', function(req, res, next) {
 });
 
 // app.get('/api', api.findAll);
-// app.get('/api/:id', api.findById);
+app.get('/xxx', parse.xParse);
 app.get('/hmone', api.hmone);
 app.get('/hmone/:id', api.hmoneId);
 
