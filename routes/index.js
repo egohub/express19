@@ -1,14 +1,14 @@
 var request = require('request');
 var cheerio = require('cheerio');
+var liveurl = "https://drhmonegyi.net/wp-json/wp/v2/posts";
 
-var fullHd = 'https://hmonegyi.club/wp-json/wp/v2/posts?categories=7';
+
 exports.hmone = function (req, res) {
   var games = {}, data= [];
 
-  var liveurl = "https://drhmonegyi.net/wp-json/wp/v2/posts";
   var url = "https://hmonegyi.club/wp-json/wp/v2/posts";
 
-  var option = {url : url,json : true,method: 'GET'};
+  var option = {url : liveurl,json : true,method: 'GET'};
   request(option, function (error, resp, body) {
        var sofa = body;
        for (var i = 0; i < sofa.length; i++) {
@@ -18,23 +18,32 @@ exports.hmone = function (req, res) {
                  title: sofa[i].title.rendered
          });
        }
-       res.send(data);
+       console.log(data);
+       res.send(sofa);
    })
 };
 
 exports.hmoneId = function (req, res) {
-    var id = req.params.id, data =[];
-    var matches = 'https://hmonegyi.club/wp-json/wp/v2/posts/'+id;
+    var id = req.params.id, url  = {},  data =[];
+    var matches = liveurl+'/'+id;
     var option = {url : matches, json : true, method: 'GET'};
     request(option, function (error, resp, body) {
          var lineups = body;
          var $ = cheerio.load(body.content.rendered);
-         console.log($('a').attr('href'));
+         // console.log($('a').attr('href'));
+         var img  = $('img').attr('src');
+         var ads  = $('a').attr('href');
+         request('https://killer.suchcrypto.co/kill?'+ads, function (error, resp, body) {
+           url.link = body;
+
          data.push({
            title  : lineups.title.rendered,
+           image : img,
            content : lineups.content.rendered,
-           video : $('a').attr('href')
+           video : url.link
          })
          res.send(data);
      })
+   })
+
 };
