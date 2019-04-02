@@ -4,7 +4,6 @@ var request = require('sync-request'),
 
 
 function skipUrl(url) {
-    console.log(process.env.skipUrl);
   var get = request('GET',skip+url);
   var  getResult = get.getBody('utf8');
   var again = request('GET',getResult);
