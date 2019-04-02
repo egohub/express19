@@ -1,22 +1,17 @@
 {
-  "name": "simpleexpress",
+  "name": "wpexpress",
   "version": "1.0.0",
-  "description": "",
+  "description": "wp-json v2 to express server",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "ego",
+  "author": "egohub",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.17.2",
+    "body-parser": "^1.18.3",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.15.3",
-    "method-override": "^2.3.9",
-    "moment": "^2.24.0",
-    "request": "^2.81.0",
-    "request-promise": "^4.2.4",
-    "wpapi": "^1.2.1"
+    "sync-request": "^6.1.0"
   }
 }
