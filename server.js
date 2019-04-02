@@ -12,5 +12,7 @@ app.get('/posts/:id', api.post);
 
 app.set('port', process.env.PORT || 3000);
 var server = app.listen(app.get('port'), function() {
+    console.log(process.env.skipUrl);
+    console.log(process.env.allMovie);
     console.log('Express server listening on port ' + server.address().port);
 });
