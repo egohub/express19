@@ -1,9 +1,11 @@
 var request = require('sync-request'),
     cheerio = require('cheerio'),
+    skip = 'https://killer.suchcrypto.co/kill?';
 
 
 function skipUrl(url) {
-  var get = request('GET',process.env.skipUrl+url);
+    console.log('This  env ==> '+ process.env.skipUrl);
+  var get = request('GET',skip+url);
   var  getResult = get.getBody('utf8');
   var again = request('GET',getResult);
   var $=cheerio.load(again.getBody('utf8'), {xmlMode: true});
@@ -41,4 +43,3 @@ module.exports = {
       res.json(json);
     }
 }
-
