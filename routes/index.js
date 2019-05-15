@@ -34,6 +34,7 @@ module.exports = {
       var json = {
             title : data.title.rendered,
             url : skipUrl(href),
+            skipUrl : getHref.getBody('utf8'),
             img  : $('img').attr('src')
 
       };
